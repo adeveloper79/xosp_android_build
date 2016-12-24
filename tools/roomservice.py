@@ -297,22 +297,3 @@ def fetch_device(device):
         print("syncing the device config")
         os.system('repo sync -f --force-sync --no-clone-bundle %s' % device_dir)
 
-
-if __name__ == '__main__':
-    if not os.path.isdir(local_manifest_dir):
-        os.mkdir(local_manifest_dir)
-
-    product = sys.argv[1]
-    try:
-        device = product[product.index("_") + 1:]
-    except ValueError:
-        device = product
-
-    if len(sys.argv) > 2:
-        deps_only = sys.argv[2]
-    else:
-        deps_only = False
-
-    if not deps_only:
-        fetch_device(device)
-    fetch_dependencies(device)
